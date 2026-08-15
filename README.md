@@ -5,14 +5,12 @@ ffind is an alternative to plocate (and also mlocate) due to them being so bloat
 ## Installation
 
 You can compile the ffind.c file manually or either run the Makefile provided in the repo.
-For the Makefile you will have to make sure gcc is installed on your system.
+For the Makefile you will have to make sure gcc or similar is installed on your system.
 
 ```
-xz3k@gentoo ffind $ make ffind
-xz3k@gentoo ffind $ chmod +x ffind
-xz3k@gentoo ffind $ chmod +x ffupdate
-xz3k@gentoo ffind $ doas cp ffind /bin
-xz3k@gentoo ffind $ doas cp ffupdate /bin
+xz3k@gentoo ffind $ make install
 ```
 
-**Note** : You may edit the CFLAFS or the CC in the Makefile or change the definitions in ffind.h
+you can also make just the binary by doing `make` alone
+
+**Note** : You may edit the CFLAGS, CC or SYSBIN in the Makefile to fit your system.

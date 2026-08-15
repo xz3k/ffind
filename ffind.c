@@ -1,7 +1,12 @@
 #include "ffind.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <stddef.h>
 
-int main(int argc, char* argv[]) {
-	if (argc == 1) {
+int main(int argc, char **argv) {
+	if (argc < 2) {
 		printf("%s: No pattern specified.\n", argv[0]);
 		return 0;
 	}
@@ -12,7 +17,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	FILE* db_fp = (FILE*)fopen(DB_PATH, "r");
+	FILE* db_fp = fopen(DB_PATH, "r");
 	if (db_fp == NULL) {
 		perror("fopen");
 		return 1;
@@ -43,8 +48,8 @@ int main(int argc, char* argv[]) {
 	else
 		pattern = argv[1];
 
-	char path_buffer[PATH_MAX + 1];
-	while (fgets(path_buffer, PATH_MAX, db_fp) != NULL) {
+	char path_buffer[MAX_PATH_SZ + 1];
+	while (fgets(path_buffer, MAX_PATH_SZ, db_fp) != NULL) {
 		path_buffer[strcspn(path_buffer, "\n")] = '\0';
 
 		if (strstr(path_buffer, pattern) != NULL)

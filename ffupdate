@@ -1,15 +1,18 @@
-#!/bin/bash
+#!/bin/env sh
+
+set -e
 
 DB_LOCATION="/usr/share/ffind"
 DB_PATH="$DB_LOCATION/ffind.db"
 
-if [[ $UID != 0 ]]; then
+if [ ! "$(id -u)" = 0 ]; then
 	printf "Please run ffupdate as root.\n"
-	exit
+	return 1
 fi
 
-mkdir -p $DB_LOCATION 2>/dev/null
-touch $DB_PATH
-chmod -R +rw $DB_LOCATION
+mkdir -p "$DB_LOCATION"
+touch "$DB_PATH"
+chmod -R 666 "$DB_LOCATION"
+chmod 755 "$DB_LOCATION"
 
 find / 2>/dev/null > $DB_PATH
